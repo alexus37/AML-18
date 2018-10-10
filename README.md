@@ -7,6 +7,10 @@ Repo for the advanced machine learning class at ETH Autumn semester 2018
 
 ## Setting up the environment
 After installing the required software, you must setup the environment. This can be done by one of these two methods:
+
+**IMPORTANT**:
+add export PYTHONHASHSEED=42 to your .bashrc file to get always reproducable results
+
 ### Importing an environment
 This will create the new conda environment "aml" and install all the required software.
 #### Linux (CPU)
