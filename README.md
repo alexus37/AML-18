@@ -1,21 +1,27 @@
 # AML-18
+
 This repository contains our solutions of for 5 projects of the AML class at ETH.
 
 ## TASK 1
 
-### Approach 
+### Approach
+
+![Feature realtions](images/task1.png)
+
 In our final pipeline design, which we used for our best prediction, we started by filling in the Nan values in the data by computing the mean per feature. 
-In the second step, we removed the mean and divided by the standard deviation to whiten the data. 
+In the second step, we removed the mean and divided by the standard deviation to whiten the data.
 
-In the third step, we reduced the amount of feature by computing the importance of each feature with univariate linear regression tests and a random forest regressor. After sorting this two list, we computed the union of the first 150 features from the linear regression tests and 100 of the random forest regressor and ended up with the 180 most important features. 
+In the third step, we reduced the amount of feature by computing the importance of each feature with univariate linear regression tests and a random forest regressor. After sorting this two list, we computed the union of the first 150 features from the linear regression tests and 100 of the random forest regressor and ended up with the 180 most important features.
 
-The final regression was done by a neural network with a depth of 10 and a width of 80. Each layer was a dense layer followed by a leaky ReLu and a dropout layer to prevent overfitting.  As a loss function, we use the mean squared error and as an optimizer, we use Adam with a learning rate of 0.01.  We trained the network for 40 epochs and randomly shuffled the input each time. 
+The final regression was done by a neural network with a depth of 10 and a width of 80. Each layer was a dense layer followed by a leaky ReLu and a dropout layer to prevent overfitting.  As a loss function, we use the mean squared error and as an optimizer, we use Adam with a learning rate of 0.01.  We trained the network for 40 epochs and randomly shuffled the input each time.
 
 ## TASK 2 DISEASE CLASSIFICATION FROM IMAGE FEATURES
 
 This task is primarily concerned with multi-class classification where you have 3 classes. However, we have changed the original image features in several ways. You will need to deal with class imbalance; in the training set, there are 600 examples from class 0 and 2 but 3600 examples from class 1. Test set has the same class imbalance as the training set.
 
 ### Approach
+
+![Feature realtions](images/task2.png)
 
 For our best submission, we took the raw data, without any preprocessing or feature selection and used a Support Vector Machines for classification.  
 
@@ -24,9 +30,10 @@ In each iteration, we used K-fold cross-validation with k equal to 10 and to det
 the average of balanced accuracy score of each fold. By applying this method we determined the optimal class 
 weights for the loss function for our unbalanced classification problem.  
 
-For the final classifications, we used the 3 most promising weights and constructed 3 different SVC. Each SVC is using radial basis function with gamma defined as one divided by the number of features and the one vs rest approach. To classify a sample we implemented a majority voting. As a heuristic, if there is a tie between the 3 classifiers, we pick the class with the highest predicted probability. This technique gave us a public score of roughly 0.719.
+For the final classifications, we used the 3 most promising weights and constructed 3 different SVC. Each SVC is using radial basis function with gamma defined as one divided by the number of features and the one vs rest approach. To classify a sample we implemented a majority voting. As a heuristic, if there is a tie between the 3 classifiers, we pick the class with the highest predicted probability.
 
 Public score: 0.719508717415
+
 Private score: 0.698333333333
 
 ## TASK 3
@@ -43,6 +50,7 @@ For our final prediction, we scaled the data using the standard scaler and input
 ## TASK 4
 
 ### Approach
+
 For our final submission, we decided to split up each video into segments of 22 frames, since the shortest video in our train and test set has 22 frames. 
 The next step in our pipeline is to extract a feature vector for every snipped. 
 We start by summing up the pixel values of each frame, to obtain some kind of heartbeat approximation. Afterwards, we compute the min, max, mean and std of that function and append it to the feature vector, as well as the function itself. Additionally, we add the mean, std and the non_zero entries of both the column and the row-wise pixels of the video. Finally, we compute the difference between two following frame to get a measure for the change in pixel intensity. From this measurement, we use again the row and column-wise mean, std and non zero counts as well as the mean and std of the framewise sum. This result in a 13872-dimensional feature vector, on which we perform feature selection with a random forest regressor with 10000 estimators, resulting into a 2233 dimensional vector. 
@@ -64,10 +72,11 @@ A linear Chain Conditional Random Field with structured SVM solver with a 1-slac
 As a post-processing step, a median filter is applied after each classifier is doing the predictions and after the majority voting.
 
 Public score: 0.937262129734
+
 Private score: 0.91728428545
 
-
 ## Required software and installation
+
 1. [Pycharm Professional](https://www.jetbrains.com/pycharm/): Python IDE used for development and debugging.
 2. [Anaconda3](https://www.anaconda.com/download/): Python Data Science Platform, used for the Conda environment variables.
 
