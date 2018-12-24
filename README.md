@@ -1,4 +1,4 @@
-# AML-18
+# Adavanced machine learning 2018
 
 This repository contains our solutions of for 5 projects of the AML class at ETH.
 
@@ -70,6 +70,8 @@ The final prediction is done by averaging the probabilities of both regressors.
 In this task we will perform sequence classification. We will categorize temporally coherent and uniformly distributed short sections of a long time-series. In particular, for each 4 seconds of a lengthy EEG/EMG measurement of brain activity recorded during sleep, we will assign one of the 3 classes corresponding to the sleep stage present within the evaluated epoch.
 
 ### Approach
+
+![Feature realtions](images/task5.png)
 
 For the final project, we started extracting features from every 4-second segment. For the EMG signal, we took the Root Mean Square error with the zero vector, the integrated absolute value, Mean absolute value, the simple squared integral, the variance, 3rd, 4th and 5th temporal moments, the waveform length, the average amplitude change, difference absolute standard deviation value, the standard deviation, the minimum and max value and the count of value above epsilon (0.0002). For both EEG signals, we took the Petrosian Fractal Dimension, the Higuchi Fractal Dimension, the Fisher Information, the Detrended Fluctuation Analysis, the mean, the standard deviation, the minimum and max value and the count of value above epsilon (0.0002). Additionally, we added the band power of the alpha, beta, delta and theta wave as a feature, as well as the scaled version by the total signal energy. 
 This resulted in a 49-dimensional feature vector per segment. For the classification, we used a majority voting scheme build with 3 classifiers. A SVC with balanced weights,  gamma = 0.004 and C = 0.01. A LSTM with 3 LSTM layers, with 32 stateful nodes and a dropout of 0.2 and a dense softmax classification layer. 
