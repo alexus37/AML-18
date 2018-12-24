@@ -39,6 +39,9 @@ Private score: 0.698333333333
 ## TASK 3
 
 ### Approach
+
+![Feature realtions](images/task3.png)
+
 For our final submission, we started extracting a feature vector from each signal. To achieve this task we relayed on the library BioSPPy [https://biosppy.readthedocs.io/en/stable/] to extracted meaningful features of the ECG signal. 
 The after running the ECG function with the raw signal we got certain information, like the position of r peaks or the heart rate of the input.
 
