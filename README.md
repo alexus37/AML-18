@@ -54,6 +54,8 @@ For our final prediction, we scaled the data using the standard scaler and input
 
 ### Approach
 
+![Feature realtions](images/task4.png)
+
 For our final submission, we decided to split up each video into segments of 22 frames, since the shortest video in our train and test set has 22 frames. 
 The next step in our pipeline is to extract a feature vector for every snipped. 
 We start by summing up the pixel values of each frame, to obtain some kind of heartbeat approximation. Afterwards, we compute the min, max, mean and std of that function and append it to the feature vector, as well as the function itself. Additionally, we add the mean, std and the non_zero entries of both the column and the row-wise pixels of the video. Finally, we compute the difference between two following frame to get a measure for the change in pixel intensity. From this measurement, we use again the row and column-wise mean, std and non zero counts as well as the mean and std of the framewise sum. This result in a 13872-dimensional feature vector, on which we perform feature selection with a random forest regressor with 10000 estimators, resulting into a 2233 dimensional vector. 
