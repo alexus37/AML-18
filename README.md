@@ -2,7 +2,9 @@
 
 This repository contains our solutions of for 5 projects of the AML class at ETH.
 
-## TASK 1
+## TASK 1 REGRESSION FROM BRAIN FEATURES
+
+This task is about predicting the age of person, based on 1000 features of brain scans.
 
 ### Approach
 
@@ -14,6 +16,10 @@ In the second step, we removed the mean and divided by the standard deviation to
 In the third step, we reduced the amount of feature by computing the importance of each feature with univariate linear regression tests and a random forest regressor. After sorting this two list, we computed the union of the first 150 features from the linear regression tests and 100 of the random forest regressor and ended up with the 180 most important features.
 
 The final regression was done by a neural network with a depth of 10 and a width of 80. Each layer was a dense layer followed by a leaky ReLu and a dropout layer to prevent overfitting.  As a loss function, we use the mean squared error and as an optimizer, we use Adam with a learning rate of 0.01.  We trained the network for 40 epochs and randomly shuffled the input each time.
+
+Public score: ~0.67
+Private score: ~0.67
+
 
 ## TASK 2 DISEASE CLASSIFICATION FROM IMAGE FEATURES
 
@@ -36,7 +42,9 @@ Public score: 0.719508717415
 
 Private score: 0.698333333333
 
-## TASK 3
+## TASK 3 MULTICLASS CLASSIFICATION FROM ECG SIGNALS
+
+This task is about classifing a ECG signal into 4 different classes.
 
 ### Approach
 
@@ -50,7 +58,13 @@ Additional to the plain output of the ECG function, we computed the first order 
 
 For our final prediction, we scaled the data using the standard scaler and input it into a gradient boosting classifier with a maximal depth of 5 and 100 estimators.
 
-## TASK 4
+Public score: ~0.82
+
+Private score: ~0.82
+
+## TASK 4 BINARY CLASSIFICATION OF ULTRASOUND VIDEOS
+
+In this task we have short ultrasound video of a beating heart and need to classify it into two different classes.
 
 ### Approach
 
@@ -64,6 +78,10 @@ This vector is scaled using the standard scalar and used to train a random fores
 We remove the row and column wise mean and std from the original vector and end up with 667 dimensions, which are used to train a gradient boosting regressor with 100 estimators and a max depth of 5.
 
 The final prediction is done by averaging the probabilities of both regressors. 
+
+Public score: ~0.88
+
+Private score: ~0.70
 
 ## TASK 5: SLEEP STAGING FROM EEG/EMG
 
